@@ -1,0 +1,51 @@
+.explore--container {
+  width: 100%;
+  padding: 1rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .search--container {
+    display: flex;
+    align-items: center;
+
+    .search--field {
+      border: none;
+      outline: none;
+      width: 12rem;
+      border-bottom-style: solid;
+      margin-right: 0.35rem;
+    }
+
+    .search-icon {
+      width: 25px;
+      height: 20px;
+      background-color: black;
+      color: white;
+      padding: 0.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+
+  .filter-icon {
+    width: 25px;
+    height: 20px;
+    background-color: black;
+    color: white;
+    padding: 0.2rem;
+    border-radius: 4px;
+    margin-left: 0.3rem;
+    cursor: pointer;
+  }
+
+  .filter-toggle {
+    right: 2.75rem;
+    position: absolute;
+    z-index: 999;
+    background-color: rgb(233, 231, 231);
+    top: 88px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 5px;
+  }
+}
