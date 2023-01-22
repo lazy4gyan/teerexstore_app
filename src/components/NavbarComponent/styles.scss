@@ -31,5 +31,8 @@ nav {
 }
 
 .active{
-  color:red;
+  color:grey;
+  text-decoration: underline;
+  text-decoration-color: grey;
+  text-underline-offset: 5px;
 }

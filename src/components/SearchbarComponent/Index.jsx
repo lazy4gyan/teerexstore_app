@@ -15,7 +15,7 @@ const Search = () => {
         <input
           className="search--field"
           type="search"
-          placeholder="Search for products"
+          placeholder="Search for products..."
           onChange={globalStore.onSearchChange}
         />
         <FaSearch className="search-icon" />

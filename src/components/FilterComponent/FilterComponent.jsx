@@ -12,7 +12,7 @@ const FilterComponent = () => {
   const categoryComponents = filterData.map((categoryData) => {
     return (
       <Filter
-      className="filters"
+    //   className="filters"
         key={categoryData.id}
         type={categoryData.type}
         options={categoryData.options}
@@ -21,6 +21,6 @@ const FilterComponent = () => {
     );
   });
 
-  return <>{categoryComponents}</>;
+  return <div className="category_container">{categoryComponents}</div>;
 };
 export default FilterComponent;
