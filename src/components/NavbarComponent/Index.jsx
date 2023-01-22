@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import "./styles.scss";
 import { useContext } from "react";
@@ -10,17 +10,17 @@ const Navigation = () => {
   const cartStatus = cartItems.reduce((total, item) => total + item.amount, 0);
   return (
     <nav>
-      <Link to="/">Teerex Store</Link>
+      <NavLink activeClassName='active' to="/">Teerex Store</NavLink>
       <div className="nav_category">
-        <Link to="/product">Products</Link>
-        <Link to="/cart">
-          <div>
+        <NavLink activeClassName='active' to="/product">Products</NavLink>
+        <NavLink activeClassName='active' to="/cart">
+          <>
             <FaShoppingCart className="cart_icon" />
             {cartStatus > 0 && (
               <span className="card_status">{cartStatus}</span>
             )}
-          </div>
-        </Link>
+          </>
+        </NavLink>
       </div>
     </nav>
   );

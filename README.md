@@ -71,5 +71,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### `Dependencies are Sass and React-Router-Dom`
 
-npm i -D react-router-dom
-npm install -g sass
+- npm i -D react-router-dom
+- npm install -g sass
+
+### `Error: Can't find Sass module`
+
+- npm install sass-loader -D
+- npm install node-sass -D
+- rm -r node_modules
+- npm install
+- npm install -D sass-loader@^10 sass

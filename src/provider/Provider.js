@@ -14,6 +14,29 @@ function getWindowDimensions() {
 export const GlobalProvider = ({ children }) => {
   const [productData, setProductData] = useState([]);
   const [searchedText, setSearchedText] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState({
+    Color: {
+      Red: false,
+      Blue: false,
+      Green: false,
+    },
+    Gender: {
+      Men: false,
+      Women: false,
+    },
+    Price: {
+      "0 - Rs. 250": false,
+      "Rs. 251 - 450": false,
+      "Rs. 451 & above": false,
+    },
+    Type: {
+      Polo: false,
+      Hoodie: false,
+      Basic: false,
+    },
+  });
+  const [filteredItems, setFilteredItems] = useState([]);
+
   const [cart, setCart] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -56,6 +79,84 @@ export const GlobalProvider = ({ children }) => {
   const searchResult = productData.filter((product) =>
     product.name.toLowerCase().includes(searchedText.toLowerCase())
   );
+
+  
+  function selectCategory(event) {
+    const { name, value, checked } = event.target;
+    setSelectedCategories((prevSelectedCategories) => {
+      return {
+        ...prevSelectedCategories,
+        [name]: {
+          ...prevSelectedCategories[name],
+          [value]: checked,
+        },
+      };
+    });
+  }
+
+  useEffect(() => {
+    let selectedOptions = [];
+    let priceOptions = [];
+    for (let category in selectedCategories) {
+      for (let option in selectedCategories[category]) {
+        if (selectedCategories[category][option]) {
+          selectedOptions.push(option);
+        }
+      }
+    }
+
+    for (let i in selectedOptions) {
+      if (selectedOptions[i].includes("0 - Rs. 250")) {
+        priceOptions.push(0);
+      } else if (selectedOptions[i].includes("Rs. 251 - 450")) {
+        priceOptions.push(251);
+      } else if (selectedOptions[i].includes("Rs. 451 & above")) {
+        priceOptions.push(451);
+      }
+    }
+
+    let selectedProducts = [];
+
+      // filter for other options except price
+    for (let product of productData) {
+      for (let info in product) {
+        if (selectedOptions.includes(product[info])) {
+          selectedProducts.push(product);
+        }
+      }
+    }
+    // filter for price options
+    if (priceOptions.length > 0) {
+
+      for (let price in priceOptions) {
+        if (priceOptions[price] === 0) {
+          let val = [0, 250];
+          productData.filter((items) => {
+            if (items.price > val[0] && items.price <= val[1]) {
+              selectedProducts.push(items);
+            }
+          });
+        } else if (priceOptions[price] === 251) {
+          let val = [251, 450];
+          productData.filter((items) => {
+            if (items.price > val[0] && items.price <= val[1]) {
+              selectedProducts.push(items);
+            }
+          });
+        } else if (priceOptions[price] === 451) {
+          let val = [451, 100000];
+          productData.filter((items) => {
+            if (items.price > val[0] && items.price <= val[1]) {
+              selectedProducts.push(items);
+            }
+          });
+        }
+      }
+    }
+
+    setFilteredItems(selectedProducts);
+  }, [selectedCategories]);
+
 
   const addToCartHandler = (item) => {
     if (cart.some((cartItem) => cartItem.id === item.id)) {
@@ -103,6 +204,8 @@ export const GlobalProvider = ({ children }) => {
         productList: productData,
         cart,
         FILTER_CATEGORY,
+        selectCategory,
+        filteredItems,
         onSearchChange,
         searchResult,
         addToCartHandler,

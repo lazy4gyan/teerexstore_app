@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { GlobalContext } from "../../provider/Provider";
+import { toast } from "react-hot-toast";
+
 import "./styles.scss";
 
 export default function Products() {
@@ -8,11 +10,25 @@ export default function Products() {
   const handleChange = globalStore.handleCartChange;
   const cartItems = globalStore.cart;
   const searchedItems = globalStore.searchResult;
+  const filteredItems = globalStore.filteredItems;
   const addToCartHandler = globalStore.addToCartHandler;
+  const notify = () => toast.error("No more items available!");
+
+  // console.log(filteredItems)
+
 
   let items;
 
-  searchedItems.length > 0 ? (items = searchedItems) : (items = productData);
+  // searchedItems.length > 0 ? (items = searchedItems) : filteredItems.length > 0 ? (items = filteredItems) : (items = productData);
+  if (filteredItems.length > 0) {
+    items = filteredItems;
+  } else if (searchedItems.length > 0) {
+    items = searchedItems;
+  } else if (searchedItems.length > 0 && filteredItems.length > 0) {
+    items = [...searchedItems, ...filteredItems];
+  } else {
+    items = productData;
+  }
 
   const productCard = items.map((item) => {
     const present = cartItems.find((x) => x.id === item.id)?.amount;
@@ -35,7 +51,7 @@ export default function Products() {
         <div className="product_details">
           <span className="product_price">&#8377; {item.price}</span>
           {present > 0 ? (
-            <div className="cart_card-quantity">
+            <div className="cart_card-qtyDisplay">
               <button className="btn" onClick={() => handleChange(item.id, -1)}>
                 &#8722;
               </button>
@@ -43,7 +59,7 @@ export default function Products() {
               <button
                 className="btn"
                 onClick={() =>
-                  itemLimitExceeds() ? alert("Limit") : handleChange(item.id, 1)
+                  itemLimitExceeds() ? notify() : handleChange(item.id, 1)
                 }
               >
                 &#43;

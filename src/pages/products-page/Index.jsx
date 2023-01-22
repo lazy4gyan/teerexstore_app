@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import FilterComponent from "../../components/FilterComponent/FilterComponent";
 import Filter from "../../components/FilterComponent/Index";
 import Products from "../../components/ProductComponent/Index";
 import Search from "../../components/SearchbarComponent/Index";
@@ -17,7 +18,10 @@ const ProductPage = () => {
         </div>
       ) : (
         <div className="home_container">
-          {globalStore.width > 600 && <Filter />}
+          {globalStore.width > 600 
+          && 
+          <FilterComponent />
+          }
           {globalStore.productList.length > 0 ? (
             <Products />
           ) : (

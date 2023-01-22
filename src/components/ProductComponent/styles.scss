@@ -58,3 +58,13 @@
     }
   }
 }
+
+.cart_card-qtyDisplay{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .btn{
+    width:55px;
+  }
+}

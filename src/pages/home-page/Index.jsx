@@ -4,6 +4,7 @@ import Filter from "../../components/FilterComponent/Index";
 import Products from "../../components/ProductComponent/Index";
 import Search from "../../components/SearchbarComponent/Index";
 import "./styles.scss";
+import FilterComponent from "../../components/FilterComponent/FilterComponent";
 
 const Home = () => {
   const globalStore = useContext(GlobalContext);
@@ -17,7 +18,9 @@ const Home = () => {
         </div>
       ) : (
         <div className="home_container">
-          {globalStore.width > 600 && <Filter />}
+          {globalStore.width > 600 
+          && <FilterComponent />
+          }
 
           {globalStore.productList.length > 0 ? (
             <Products />

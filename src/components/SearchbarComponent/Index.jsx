@@ -1,6 +1,7 @@
 import { useState, useContext, useRef } from "react";
 import { FaFilter, FaSearch } from "react-icons/fa";
 import { GlobalContext } from "../../provider/Provider";
+import FilterComponent from "../FilterComponent/FilterComponent";
 import Filter from "../FilterComponent/Index";
 import "./styles.scss";
 
@@ -28,7 +29,7 @@ const Search = () => {
 
       {globalStore.width < 600 && filterToggle && (
         <div className="filter-toggle">
-          <Filter />
+          <FilterComponent />
         </div>
       )}
     </div>

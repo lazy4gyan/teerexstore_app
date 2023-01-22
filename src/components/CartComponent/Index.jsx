@@ -14,6 +14,10 @@ export default function Cart() {
   );
 
   const renderCart = cartItems.map((item, index) => {
+    const itemLimitExceeds = () =>
+      cartItems.find((x) => x.id === item.id)?.amount >= item.quantity
+        ? true
+        : false;
     return (
       <section className="cart_card-container" key={index}>
         <img className="cart_card-image" src={item.imageURL} alt="item" />
@@ -23,12 +27,12 @@ export default function Cart() {
         </div>
         <div className="cart_card-quantity">
           <span className="cart_card-label">Quantity</span>
-          <div className="cart_card-quantity">
-            <button className="btn" onClick={() => handleChange(item.id, -1)}>
+          <div className="cart_card-quantity_container">
+            <button className="plus_btn" onClick={() => handleChange(item.id, -1)}>
               &#8722;
             </button>
-            <span>{item.amount}</span>
-            <button className="btn" onClick={() => handleChange(item.id, 1)}>
+            <span class="cart_qty">{item.amount}</span>
+            <button className="minus_btn" onClick={() => itemLimitExceeds() ? alert("limit reached") : handleChange(item.id, 1)}>
               &#43;
             </button>
           </div>
@@ -46,11 +50,13 @@ export default function Cart() {
         <>
           {renderCart}
           <div>
-            <span>Total : {totalPrice}</span>
+            <span style={{fontSize:"20px",fontWeight:"500", marginBottom:"2rem"}}>Total : {totalPrice}</span>
           </div>
         </>
       ) : (
-        "Your cart is empty."
+        <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"80vh"}}>
+          Your cart is empty !
+        </div>
       )}
     </article>
   );
