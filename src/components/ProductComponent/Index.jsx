@@ -14,12 +14,8 @@ export default function Products() {
   const addToCartHandler = globalStore.addToCartHandler;
   const notify = () => toast.error("No more items available!");
 
-  // console.log(filteredItems)
-
-
   let items;
 
-  // searchedItems.length > 0 ? (items = searchedItems) : filteredItems.length > 0 ? (items = filteredItems) : (items = productData);
   if (filteredItems.length > 0) {
     items = filteredItems;
   } else if (searchedItems.length > 0) {

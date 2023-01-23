@@ -12,7 +12,6 @@ const FilterComponent = () => {
   const categoryComponents = filterData.map((categoryData) => {
     return (
       <Filter
-    //   className="filters"
         key={categoryData.id}
         type={categoryData.type}
         options={categoryData.options}

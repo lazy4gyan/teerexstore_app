@@ -1,7 +1,5 @@
 export const BASEURL = "https://geektrust.s3.ap-southeast-1.amazonaws.com";
 
-export const MOBILE_VIEW = 600;
-
 export const FILTER_CATEGORY = [
     {
       id: 0,

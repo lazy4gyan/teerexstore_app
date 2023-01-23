@@ -1,6 +1,5 @@
 .card_container {
   display: grid;
-  // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
   gap: 1rem;
   padding: 0 1rem 2rem 1rem;
@@ -36,6 +35,16 @@
         text-align: center;
         padding-top: 0.4rem;
       }
+      .cart_card-qtyDisplay{
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+      
+        .btn{
+          width:55px;
+        }
+      }
+      
 
       button {
         border: none;
@@ -59,12 +68,3 @@
   }
 }
 
-.cart_card-qtyDisplay{
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .btn{
-    width:55px;
-  }
-}

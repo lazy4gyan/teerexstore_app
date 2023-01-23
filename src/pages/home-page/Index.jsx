@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../../provider/Provider";
-import Filter from "../../components/FilterComponent/Index";
 import Products from "../../components/ProductComponent/Index";
 import Search from "../../components/SearchbarComponent/Index";
 import "./styles.scss";
@@ -19,7 +18,7 @@ const Home = () => {
       ) : (
         <div className="home_container">
           {globalStore.width > 600 
-          && <FilterComponent />
+          && <div style={{border:1,borderStyle:"groove", height:"58vh"}}><FilterComponent /></div>
           }
 
           {globalStore.productList.length > 0 ? (

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { BASEURL, MOBILE_VIEW, FILTER_CATEGORY } from "../utils/Constants";
+import { BASEURL, FILTER_CATEGORY } from "../utils/Constants";
 
 export const GlobalContext = createContext({});
 
@@ -80,7 +80,6 @@ export const GlobalProvider = ({ children }) => {
     product.name.toLowerCase().includes(searchedText.toLowerCase())
   );
 
-  
   function selectCategory(event) {
     const { name, value, checked } = event.target;
     setSelectedCategories((prevSelectedCategories) => {
@@ -117,7 +116,6 @@ export const GlobalProvider = ({ children }) => {
 
     let selectedProducts = [];
 
-      // filter for other options except price
     for (let product of productData) {
       for (let info in product) {
         if (selectedOptions.includes(product[info])) {
@@ -125,9 +123,7 @@ export const GlobalProvider = ({ children }) => {
         }
       }
     }
-    // filter for price options
     if (priceOptions.length > 0) {
-
       for (let price in priceOptions) {
         if (priceOptions[price] === 0) {
           let val = [0, 250];
@@ -156,7 +152,6 @@ export const GlobalProvider = ({ children }) => {
 
     setFilteredItems(selectedProducts);
   }, [selectedCategories]);
-
 
   const addToCartHandler = (item) => {
     if (cart.some((cartItem) => cartItem.id === item.id)) {
